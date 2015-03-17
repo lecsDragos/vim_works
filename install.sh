@@ -7,7 +7,7 @@ ANSI_RED_BOLD='\033[0;31;1m'
 ANSI_GREEN='\033[32m'
 ANSI_RESET='\033[0m'
 
-create_vim_folder() {
+check_vim_folder() {
   if [ -d $VIMFOLDER ]
   then
     echo "$ANSI_RED_BOLD You already have a .vim folder in your home directory. $ANSI_RESET"
@@ -22,7 +22,7 @@ create_vim_folder() {
   fi
 }
 
-create_vimrc_folder() {
+check_vimrc_folder() {
   if [ -L $VIMRC ] || [ -f $VIMRC ]
   then
     echo -e "$ANSI_RED_BOLD There's .vimrc in your home directory. $ANSI_RESET"
@@ -38,8 +38,7 @@ create_vimrc_folder() {
 }
 
 check_git_availability() {
-  hash git >/dev/null && /usr/bin/env git clone git@github.com:swammerdamn/vim_works.git
-   $VIMFOLDER || {
+  hash git >/dev/null && /usr/bin/env git clone git@github.com:swammerdamn/vim_works.git $VIMFOLDER || {
     echo "Sorry, git is not installed in this machine."
     exit
   }
@@ -55,8 +54,8 @@ start_setup() {
   sh ./update.sh
 }
 
-create_vim_folder
-create_vimrc_folder
+check_vim_folder
+check_vimrc_folder
 check_git_availability
 create_symlinks
 start_setup
