@@ -10,11 +10,11 @@ ANSI_RESET='\033[0m'
 create_vim_folder() {
   if [ -d $VIMFOLDER ]
   then
-    echo -e "$ANSI_RED_BOLD You already have a .vim folder in your home directory. $ANSI_RESET"
+    echo "$ANSI_RED_BOLD You already have a .vim folder in your home directory. $ANSI_RESET"
     read -p "Would you like to backup your .vim folder first? [y/n] " ans
     if [ "$ans" == "y" ]
     then
-      echo "backup your original $VIMFOLDER to $VIMFOLDER-$(date +%Y%m%d)-$backup_rand"
+      echo "backup your original $VIMFOLDER to $VIMFOLDER-$(date +%Y%m%d)-$RANDOM"
       mv $VIMFOLDER $VIMFOLDER-$(date +%Y%m%d)-$RANDOM
     else
       exit
@@ -29,7 +29,7 @@ create_vimrc_folder() {
     read -p "Would you like to backup your .vimrc first? [y/n] " ans
     if [ "$ans" == "y" ]
     then
-      echo "backup your original $VIMRC to $VIMRC-$(date +%Y%m%d)-$backup_rand"
+      echo "backup your original $VIMRC to $VIMRC-$(date +%Y%m%d)-$RANDOM"
       mv $VIMRC $VIMRC$(date +%Y%m%d)-$RANDOM
     else
       exit
@@ -38,7 +38,8 @@ create_vimrc_folder() {
 }
 
 check_git_availability() {
-  hash git >/dev/null && /usr/bin/env git clone git://github.com/kaochenlong/eddie-vim.git $VIMFOLDER || {
+  hash git >/dev/null && /usr/bin/env git clone git@github.com:swammerdamn/vim_works.git
+   $VIMFOLDER || {
     echo "Sorry, git is not installed in this machine."
     exit
   }
@@ -54,11 +55,11 @@ start_setup() {
   sh ./update.sh
 }
 
-create_vim_folder()
-create_vimrc_folder()
-check_git_availability()
-create_symlinks()
-start_setup()
+create_vim_folder
+create_vimrc_folder
+check_git_availability
+create_symlinks
+start_setup
 
 echo ""
 echo -e "$ANSI_GREEN Instalation complete! Enjoy vim ;) $ANSI_RESET"
