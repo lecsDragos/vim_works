@@ -51,7 +51,7 @@ create_symlinks() {
 
 start_setup() {
   cd $VIMFOLDER
-  sh ./setup.sh
+  sh ./update.sh
 }
 
 create_vim_folder()
