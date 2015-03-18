@@ -8,8 +8,6 @@ call pathogen#helptags()
 
 syntax enable
 set background=dark
-let g:solarized_termcolors=256
-colorscheme solarized
 
 set linespace=2
 set guifont=Inconsolata-g:h16
